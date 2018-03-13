@@ -12,6 +12,11 @@ public class LinkedList {
 		public Node(int value) {
 			this.value=value;
 		}
+		
+		@Override
+		public String toString() {
+			return value+"";
+		}
 	}
 	
 	public void addTail(int value)
@@ -77,13 +82,18 @@ public class LinkedList {
 		if(first==null) return false;
 		
 		Node nextNode=first;
-		while(nextNode!=null)
+		Node previous=null;
+		while(nextNode.next!=null)
 		{
+			
+			previous=nextNode;
 			nextNode=nextNode.next;
 			
 		}
+		if(previous!=null)		previous.next=null;
+		else this.first=null;
 		
-		
+		return true;
 		
 	}
 	
@@ -102,15 +112,9 @@ public class LinkedList {
 	public static void main(String[] args) {
 		LinkedList list=new LinkedList();
 		list.addTail(1);
-		list.addTail(2);
-		list.addTail(3);
-		list.addTail(4);
-		list.addTail(5);
-		list.addHead(7);
-		list.addHead(8);
-		list.add(2, 9);
-		list.add(1, 10);
-		list.add(9, 11);
+
+
+		list.deleteTail();
 		list.printContent();
 	}
 }
