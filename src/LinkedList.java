@@ -92,7 +92,18 @@ public class LinkedList {
 		}
 		if(previous!=null)		previous.next=null;
 		else this.first=null;
+		return true;
 		
+	}
+	
+	public boolean deleteHead() 
+	{
+		if(first==null) return false;
+		
+		Node tempNode=first;
+		this.first=tempNode.next;
+		tempNode.next=null;
+
 		return true;
 		
 	}
@@ -112,8 +123,18 @@ public class LinkedList {
 	public static void main(String[] args) {
 		LinkedList list=new LinkedList();
 		list.addTail(1);
-
-
+		list.addTail(2);
+		list.addTail(3);
+		list.addTail(4);
+		list.addTail(5);
+		list.addHead(7);
+		list.addHead(8);
+		list.deleteTail();
+		list.add(2, 9);
+		list.printContent();
+		list.deleteHead();
+		list.add(1, 10);
+		//list.add(9, 11);
 		list.deleteTail();
 		list.printContent();
 	}
