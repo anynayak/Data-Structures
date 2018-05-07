@@ -56,25 +56,81 @@ public class BinarySearchTree {
 	{
 		if(node==null)
 		{
-			new Node(value);
+			node=new Node(value);
+			return node;
 		}
 
 		if(value<node.value)
 			
-			return insertRec(node.left, value);
+			node.left=insertRec(node.left, value);
 				
 		else
-			return insertRec(node.right, value);
+			node.right=insertRec(node.right, value);
+		
+		return node;
+		
+	}
+	
+	private boolean searchRec(Node node,int value)
+	{
+		if(node==null)
+		{
+			return false;
+		}
+		
+		if(node.value==value)
+			return true;
+		else if(value<node.value)
+			
+			return searchRec(node.left, value);
+				
+		else
+			return searchRec(node.right, value);
+		
+	}
+	
+	
+	public void inorder(Node node)
+	{
+		if(node==null) return;
+		
+		inorder(node.left);
+		System.out.println(node.value);
+		inorder(node.right);
+		
+	}
+	public void preOrder(Node node)
+	{
+		if(node==null) return;
+		System.out.println(node.value);
+		inorder(node.left);
+		inorder(node.right);
+		
+	}
+	
+	public void postOrder(Node node)
+	{
+		if(node==null) return;
+		inorder(node.left);
+		inorder(node.right);
+		System.out.println(node.value);
+
 		
 	}
 	
 	public static void main(String[] args) {
 		
 		BinarySearchTree bst=new BinarySearchTree();
-		bst.insert(1);
-		bst.insert(2);
-		bst.insert(3);
-		bst.insert(4);
-		bst.insert(5);
+		bst.root=bst.insertRec(bst.root,1);
+		bst.insertRec(bst.root,2);
+		bst.insertRec(bst.root,3);
+		bst.insertRec(bst.root,4);
+		bst.insertRec(bst.root,5);
+		bst.inorder(bst.root);
+		System.out.println(bst.searchRec(bst.root, 6));
+		bst.preOrder(bst.root);
+		System.out.println(bst.searchRec(bst.root, 1));
+		bst.postOrder(bst.root);
+		System.out.println(bst.searchRec(bst.root, 9));
 	}
 }
