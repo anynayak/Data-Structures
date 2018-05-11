@@ -71,7 +71,7 @@ public class BinarySearchTree {
 		
 	}
 	
-	private boolean searchRec(Node node,int value)
+	public boolean searchRec(Node node,int value)
 	{
 		if(node==null)
 		{
@@ -90,6 +90,23 @@ public class BinarySearchTree {
 	}
 	
 	
+	public Node deleteRec(Node node,int value)
+	{
+		if(node==null) return node;
+
+		else if(value<node.value)
+			node.left = deleteRec(node.left, value);
+		else if(value>node.value)
+			node.right=deleteRec(node.right, value);
+		else
+		{
+			if(node.left==null) return node.right;
+			else if(node.right==null) return node.left;
+				
+		}
+		
+	}
+	
 	public void inorder(Node node)
 	{
 		if(node==null) return;
@@ -103,19 +120,16 @@ public class BinarySearchTree {
 	{
 		if(node==null) return;
 		System.out.println(node.value);
-		inorder(node.left);
-		inorder(node.right);
-		
+		preOrder(node.left);
+		preOrder(node.right);
 	}
 	
 	public void postOrder(Node node)
 	{
 		if(node==null) return;
-		inorder(node.left);
-		inorder(node.right);
+		postOrder(node.left);
+		postOrder(node.right);
 		System.out.println(node.value);
-
-		
 	}
 	
 	public static void main(String[] args) {

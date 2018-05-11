@@ -103,7 +103,6 @@ public class LinkedList {
 		Node tempNode=first;
 		this.first=tempNode.next;
 		tempNode.next=null;
-
 		return true;
 		
 	}
