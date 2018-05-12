@@ -102,11 +102,21 @@ public class BinarySearchTree {
 		{
 			if(node.left==null) return node.right;
 			else if(node.right==null) return node.left;
+		
+			Node temp=getNodeSuccesor(node.right);
+			node.value=temp.value;
+			node.right= deleteRec(node.right, value);
 				
 		}
-		
+		return node;
 	}
 	
+	private Node getNodeSuccesor(Node node)
+	{
+		if(node.left==null) return node;
+		
+		return getNodeSuccesor(node.left);
+	}
 	public void inorder(Node node)
 	{
 		if(node==null) return;
