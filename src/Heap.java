@@ -17,29 +17,23 @@ public class Heap {
 	
 	private void heapify()
 	{
-		int chIndex=0;
-		for (int i = 1; i < index; i++) 
+		int phIndex=0,chIndex=index;
+		while(chIndex>0)
 		{
-			chIndex=2*i+1;
-			if(chIndex>=index) break;
-			if(heapArray[i]<heapArray[chIndex])
+			phIndex=chIndex/2;
+			if(phIndex<1) break;
+			if(heapArray[chIndex]<heapArray[phIndex])
 			{
-				int temp=heapArray[chIndex];
-				heapArray[chIndex]=heapArray[index];
-				heapArray[i]=temp;
+				swap(chIndex, phIndex);
 			}
-			if(heapArray[i]< heapArray[chIndex-1])
-			{
-				int temp=heapArray[chIndex-1];
-				heapArray[chIndex-1]=heapArray[i];
-				heapArray[i]=temp;
-			}
+			else 
+				break;
 		}
 	}
 	
 	public boolean deleteMin()
 	{
-		if(index>1)
+		if(index>0)
 		{
 			heapArray[1]=heapArray[index];
 			heapArray[index]=0;
@@ -47,8 +41,38 @@ public class Heap {
 		}
 		else 
 			return false;
-		heapify();
+
+		int phIndex=1;
+		while(phIndex<index)
+		{
+			int chIndex=phIndex*2;
+			int chIndex1=phIndex*2+1;
+			int largest=phIndex;
+			if(chIndex<=index && heapArray[chIndex]<heapArray[largest])
+			{
+				largest=chIndex;
+			}
+			if( chIndex1<=index && heapArray[chIndex1]<heapArray[largest])
+			{
+				largest=chIndex1;
+			}
+			
+			if(phIndex!=largest)
+			{
+				swap(phIndex, largest);
+				phIndex=largest;
+			}
+			else
+				break;
+		}
 		return true;
+	}
+	
+	private void swap(int i, int j)
+	{
+		int temp=heapArray[i];
+		heapArray[i]=heapArray[j];
+		heapArray[j]=temp;
 	}
 	@Override
 	public String toString() {
@@ -64,6 +88,11 @@ public class Heap {
 		hp.addElement(11);
 		hp.addElement(6);
 		hp.deleteMin();
+		hp.deleteMin();
+		hp.deleteMin();
+		hp.addElement(7);
+		hp.addElement(8);
+		hp.addElement(8);
 		System.out.println(hp);
 				
 	}
